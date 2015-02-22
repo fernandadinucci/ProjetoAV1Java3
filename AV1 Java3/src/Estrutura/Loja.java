@@ -20,6 +20,7 @@ public class Loja
 	private Carro[] estoqueDeCarros = new Carro[10];
 	private Motocicleta[] estoqueDeMotos = new Motocicleta[10];
 	
+	//Todos os Getters and Setters prontos!
 	public String getEndereco() 
 	{
 		return endereco;
@@ -37,6 +38,9 @@ public class Loja
 		this.nome = nome;
 	}
 	
+	/*Os métodos "estaCadastrado" para carro e moto, funcionam como um mecanismo de busca dentro do array primitivo.
+	 * Após "entrar" no array, ele utiliza o "equals" para comparar os dois elementos.
+	 * Como um método boolean, ele retorna verdadeiro se for igual, e falso caso contrário.*/
 	public boolean estaCadastrado(Carro carro)
 	{
 		for(int i = 0; i < estoqueDeCarros.length; i++)
@@ -67,6 +71,12 @@ public class Loja
 		return false;
 	}
 	
+	/*Os métodos "adicionarCarro" e "adicionarMoto" recebem por parâmetro os atributos das classes em questão.
+	 * Além desses atributos eles também recebem o "index" que seria a posição dentro do array.
+	 * Primeiro um objeto carro recebe todos os parâmetros, para depois verificarmos se já existe dentro do array
+	 * um carro igual. Caso já exista, ele retorna uma mensagem de carro já cadastrado e não inseri o mesmo.
+	 * Caso seja um carro diferente, ele insere dentro do array na posição index os dados desse carro.
+	 * Nesses dois métodos foi necessário tratar o "NullPointerException".*/
 	public void adicionarCarro(String chassi, String montadora, String modelo, String cor, String tipo, float motorizacao, String cambio, float preco, int index)
 	{
 		
@@ -142,11 +152,12 @@ public class Loja
 		catch(NullPointerException nl)
 		{
 			System.out.println("Erro: "+nl);
-		}
-		
-		
+		}		
 	}
  	
+ 	/*Os métodos "pesquisarCarro" e "pesquisarMoto" recebem atributos das classes por parâmetro.
+ 	 * Nesses métodos elaborei uma árvore de "if" para verificar atributo por atributo até retornar se encontrou ou não.
+ 	 * Necessário tratar o "NullPointerException".*/
  	public void pesquisarCarro(String chassi, String montadora, String modelo, String cor, String tipo, float motorizacao, String cambio, float preco)
  	{
  		
@@ -175,8 +186,8 @@ public class Loja
  	 											if((estoqueDeCarros[i].getPreco() == preco)||(preco == 0))
  	 											{
  	 												aux += 1;
- 	 												System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+" | Modelo: "+
- 	 												estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+	estoqueDeCarros[i].getTipo()+
+ 	 												System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+
+ 	 												" | Modelo: "+estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+estoqueDeCarros[i].getTipo()+
  	 												" | Motorização: "+estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+ estoqueDeCarros[i].getCambio()+
  	 												" | Preço: "+estoqueDeCarros[i].getPreco());
  	 											}
@@ -251,6 +262,8 @@ public class Loja
 			
  	}
  	
+ 	/*Os métodos de pesquisa por chassi, recebem apenas o chassi por parâmetro.
+ 	 * Necessário tratar o "NullPointerException"*/
  	public void pesquisarCarro(String chassi)
  	{
  		try
@@ -312,6 +325,10 @@ public class Loja
  		}
  	}
  	
+ 	/*Nos métodos de "listarEstoque" foi implementado um for para percorrer todo o array.
+ 	 * Caso a posição do array seja igual a null, ele imprime que a vaga está disponivel.
+ 	 * Se estiver ocupada, ele imprime o veículo em questão.
+ 	 * Necessário tratar "NullPointerException".*/
  	public void listarEstoquedeCarros()
  	{
  		
@@ -367,6 +384,8 @@ public class Loja
  		System.out.println("");
  	}
  	
+ 	/*No método "limparEstoque", foi utilizado um for para percorrer todo o array e atribuir null a todas as posições.
+ 	 * Assim, o Array se torna "vazio".*/
  	public void limparEstoque()
  	{
  		for(int i = 0; i < estoqueDeCarros.length; i++)
@@ -381,6 +400,10 @@ public class Loja
  		System.out.println("Estoque de motocicletas vazio!");
  	}
  	
+ 	/* Em "gravarEstoque" foram utilizados "FileOutputStream" e "ObjectOutputStream" para permitir a saída para um arquivo externo.
+ 	 * Utilizado o "writeObject" para "escrever" no arquivo de texto.
+ 	 * Depois só precisou "fechar" o arquivo.
+ 	 * Necessário tratar IOException.*/
  	public void gravarEstoque()
  	{
  	
@@ -420,6 +443,10 @@ public class Loja
  		
  	}
  	
+ 	/* Em "recuperarEstoque" foi necessário utilizar "FileInputStream" e "ObjectInputStream" para permitir a entrada de um arquivo externo.
+ 	 * Enquanto o arquivo não chegar ao final e "i" for menor que o tamanho do array, um objeto carro ou moto estará recebendo o objeto do arquivo txt.
+ 	 * Após receber o arquivo o "if" vai verificar se esse veículo é null. Caso não seja, ele atribui ao array os atributos desse veículo e parti para o próximo laço.
+ 	 * Necessário tratar IOException, NullPointerException e ClassNotFoundException.*/
 	public void recuperarEstoque()
  	{
  

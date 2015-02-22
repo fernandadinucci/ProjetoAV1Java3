@@ -5,7 +5,9 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Motocicleta implements Serializable
 {
+	//Serializable: para dizer que os membros desta classe são "seriáveis".
 	
+	//Nessa classe retirei o atributo "tipo" por não achar necessário.
 	private String chassi;
 	private String montadora;
 	private String modelo;
@@ -13,7 +15,9 @@ public class Motocicleta implements Serializable
 	private int cilindrada;
 	private int capacidadeDoTanque;
 	private float preco;
+	//Private: para maior segurança dos dados.
 	
+	//Todos os Getters and Setters prontos!
 	public String getChassi() 
 	{
 		return chassi;
@@ -84,6 +88,8 @@ public class Motocicleta implements Serializable
 		result = prime * result + Float.floatToIntBits(preco);
 		return result;
 	}
+	
+	//Sobrescrevendo o método equals.
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

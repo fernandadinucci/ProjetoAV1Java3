@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Carro implements Serializable {
+	//Serializable: para dizer que os membros desta classe são "seriáveis".
 
 	private String chassi;
 	private String montadora;
@@ -13,6 +14,7 @@ public class Carro implements Serializable {
 	private float motorizacao;
 	private String cambio;
 	private float preco;
+	//Private: para maior segurança dos dados.
 
 	public String getChassi() {
 		return chassi;
@@ -77,6 +79,7 @@ public class Carro implements Serializable {
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
+	//Todos os Getters and Setters prontos!
 
 	@Override
 	public int hashCode() {
@@ -94,6 +97,7 @@ public class Carro implements Serializable {
 		return result;
 	}
 
+	//Sobrescrevendo o método equals.
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
