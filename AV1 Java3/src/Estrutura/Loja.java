@@ -99,15 +99,7 @@ public class Loja
 			}
 			else
 			{
-				estoqueDeCarros[index] = new Carro();
-				estoqueDeCarros[index].setChassi(chassi);
-				estoqueDeCarros[index].setMontadora(montadora);
-				estoqueDeCarros[index].setModelo(modelo);
-				estoqueDeCarros[index].setCor(cor);
-				estoqueDeCarros[index].setTipo(tipo);
-				estoqueDeCarros[index].setMotorizacao(motorizacao);
-				estoqueDeCarros[index].setCambio(cambio);
-				estoqueDeCarros[index].setPreco(preco);
+				estoqueDeCarros[index] = c;
 				System.out.println("Carro cadastrado com sucesso!");				
 			}
 		}
@@ -138,14 +130,7 @@ public class Loja
 			}
 			else
 			{
-				estoqueDeMotos[index] = new Motocicleta();
-				estoqueDeMotos[index].setChassi(chassi);
-				estoqueDeMotos[index].setMontadora(montadora);
-				estoqueDeMotos[index].setModelo(modelo);
-				estoqueDeMotos[index].setCor(cor);
-				estoqueDeMotos[index].setCilindrada(cilindrada);
-				estoqueDeMotos[index].setCapacidadeDoTanque(capacidadeDoTanque);
-				estoqueDeMotos[index].setPreco(preco);
+				estoqueDeMotos[index] = m;
 				System.out.println("Motocicleta cadastrada com sucesso!");
 			}
 		}
@@ -460,15 +445,7 @@ public class Loja
 	 			Carro carro = (Carro) in.readObject();
 				if(carro != null)
 				{
-					estoqueDeCarros[i] =  new Carro();
-					estoqueDeCarros[i].setChassi(carro.getChassi());
-					estoqueDeCarros[i].setMontadora(carro.getMontadora());
-					estoqueDeCarros[i].setModelo(carro.getModelo());
-					estoqueDeCarros[i].setCor(carro.getCor());
-					estoqueDeCarros[i].setTipo(carro.getTipo());
-					estoqueDeCarros[i].setMotorizacao(carro.getMotorizacao());
-					estoqueDeCarros[i].setCambio(carro.getCambio());
-					estoqueDeCarros[i].setPreco(carro.getPreco());
+					estoqueDeCarros[i] =  carro;
 				}
 				i += 1;
 	 		}
@@ -491,14 +468,7 @@ public class Loja
 	 			Motocicleta moto = (Motocicleta) in.readObject();
 	 			if(moto != null)
 	 			{
-		 			estoqueDeMotos[i] = new Motocicleta();
-		 			estoqueDeMotos[i].setChassi(moto.getChassi());
-		 			estoqueDeMotos[i].setMontadora(moto.getMontadora());
-		 			estoqueDeMotos[i].setModelo(moto.getModelo());
-		 			estoqueDeMotos[i].setCor(moto.getCor());
-		 			estoqueDeMotos[i].setCilindrada(moto.getCilindrada());
-		 			estoqueDeMotos[i].setCapacidadeDoTanque(moto.getCapacidadeDoTanque());
-		 			estoqueDeMotos[i].setPreco(moto.getPreco());
+		 			estoqueDeMotos[i] = moto;
 	 			}
 				i += 1;
 	 		}
