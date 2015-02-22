@@ -107,6 +107,10 @@ public class Loja
 		{
 			System.out.println("Erro: "+nl);
 		}
+		catch(IndexOutOfBoundsException ob)
+		{
+			System.out.println("Erro: "+ob);
+		}
 		
 	}
 	
@@ -137,7 +141,11 @@ public class Loja
 		catch(NullPointerException nl)
 		{
 			System.out.println("Erro: "+nl);
-		}		
+		}
+		catch(IndexOutOfBoundsException ob)
+		{
+			System.out.println("Erro: "+ob);
+		}
 	}
  	
  	/*Os métodos "pesquisarCarro" e "pesquisarMoto" recebem atributos das classes por parâmetro.
