@@ -79,7 +79,6 @@ public class Loja
 	 * Nesses dois métodos foi necessário tratar o "NullPointerException".*/
 	public void adicionarCarro(String chassi, String montadora, String modelo, String cor, String tipo, float motorizacao, String cambio, float preco, int index)
 	{
-		
 		try
 		{
 			Carro c = new Carro();
@@ -111,10 +110,9 @@ public class Loja
 		{
 			System.out.println("Erro: "+ob);
 		}
-		
 	}
 	
- 	public void adicionarMoto(String chassi, String montadora, String modelo, String cor, int cilindrada, int capacidadeDoTanque, float preco, int index)
+ 	public void adicionarMoto(String chassi, String montadora, String modelo, String cor, String tipo, int cilindrada, int capacidadeDoTanque, float preco, int index)
 	{
 		try
 		{
@@ -124,6 +122,7 @@ public class Loja
 			m.setMontadora(montadora);
 			m.setModelo(modelo);
 			m.setCor(cor);
+			m.setTipo(tipo);
 			m.setCilindrada(cilindrada);
 			m.setCapacidadeDoTanque(capacidadeDoTanque);
 			m.setPreco(preco);
@@ -153,7 +152,6 @@ public class Loja
  	 * Necessário tratar o "NullPointerException".*/
  	public void pesquisarCarro(String chassi, String montadora, String modelo, String cor, String tipo, float motorizacao, String cambio, float preco)
  	{
- 		
  		try
  		{
  			int aux = 0;
@@ -162,34 +160,16 @@ public class Loja
  	 		{
  	 			if(estoqueDeCarros[i] != null)
  	 			{
- 	 				if((estoqueDeCarros[i].getChassi()==chassi)||(chassi == null))
+ 	 				if(((estoqueDeCarros[i].getChassi()==chassi)||(chassi == null)) && ((estoqueDeCarros[i].getMontadora()==montadora)||(montadora == null)) &&
+ 	 				((estoqueDeCarros[i].getModelo()==modelo)||(modelo == null)) && ((estoqueDeCarros[i].getCor()==cor)||(cor == null)) && 
+ 	 				((estoqueDeCarros[i].getTipo()==tipo)||(tipo == null)) && ((estoqueDeCarros[i].getMotorizacao()==motorizacao)||(motorizacao == 0)) && 
+ 	 				((estoqueDeCarros[i].getCambio()==cambio)||(cambio == null)) && ((estoqueDeCarros[i].getPreco() == preco)||(preco == 0)))
  	 				{
- 	 					if((estoqueDeCarros[i].getMontadora()==montadora)||(montadora == null))
- 	 					{
- 	 						if((estoqueDeCarros[i].getModelo()==modelo)||(modelo == null))
- 	 						{
- 	 							if((estoqueDeCarros[i].getCor()==cor)||(cor == null))
- 	 							{
- 	 								if((estoqueDeCarros[i].getTipo()==tipo)||(tipo == null))
- 	 								{
- 	 									if((estoqueDeCarros[i].getMotorizacao()==motorizacao)||(motorizacao == 0))
- 	 									{
- 	 										if((estoqueDeCarros[i].getCambio()==cambio)||(cambio == null))
- 	 										{
- 	 											if((estoqueDeCarros[i].getPreco() == preco)||(preco == 0))
- 	 											{
- 	 												aux += 1;
- 	 												System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+
- 	 												" | Modelo: "+estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+estoqueDeCarros[i].getTipo()+
- 	 												" | Motorização: "+estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+ estoqueDeCarros[i].getCambio()+
- 	 												" | Preço: "+estoqueDeCarros[i].getPreco());
- 	 											}
- 	 										}
- 	 									}
- 	 								}
- 	 							}
- 	 						}
- 	 					}
+ 	 					aux += 1;
+						System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+
+						" | Modelo: "+estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+estoqueDeCarros[i].getTipo()+
+						" | Motorização: "+estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+ estoqueDeCarros[i].getCambio()+
+						" | Preço: "+estoqueDeCarros[i].getPreco());
  	 				}
  	 			}
  			}
@@ -202,12 +182,10 @@ public class Loja
  		{
  			System.out.println("Erro: "+nl);
  		}
- 		
  	}
  	
- 	public void pesquisarMoto(String chassi, String montadora, String modelo, String cor, int cilindrada, int capacidadeDoTanque, float preco)
+ 	public void pesquisarMoto(String chassi, String montadora, String modelo, String cor, String tipo, int cilindrada, int capacidadeDoTanque, float preco)
  	{
- 		
  		try
  		{
  	 		int aux = 0;
@@ -216,30 +194,15 @@ public class Loja
  	 		{
  	 			if(estoqueDeMotos[i] != null)
  	 			{
- 	 				if((estoqueDeMotos[i].getChassi()==chassi)||(chassi == null))
+ 	 				if(((estoqueDeMotos[i].getChassi()==chassi)||(chassi == null)) && ((estoqueDeMotos[i].getMontadora()==montadora)||(montadora == null)) &&
+ 	 				((estoqueDeMotos[i].getModelo()==modelo)||(modelo == null)) && ((estoqueDeMotos[i].getCor()==cor)||(cor == null)) &&
+ 	 				((estoqueDeMotos[i].getTipo()==tipo)||(tipo == null)) && ((estoqueDeMotos[i].getCilindrada()==cilindrada)||(cilindrada == 0)) &&
+ 	 				((estoqueDeMotos[i].getCapacidadeDoTanque()==capacidadeDoTanque)||(capacidadeDoTanque == 0)) && ((estoqueDeMotos[i].getPreco() == preco)||(preco == 0)))
  	 				{
- 	 					if((estoqueDeMotos[i].getMontadora()==montadora)||(montadora == null))
- 	 					{
- 	 						if((estoqueDeMotos[i].getModelo()==modelo)||(modelo == null))
- 	 						{
- 	 							if((estoqueDeMotos[i].getCor()==cor)||(cor == null))
- 	 							{
- 	 								if((estoqueDeMotos[i].getCilindrada()==cilindrada)||(cilindrada == 0))
- 	 								{
- 	 									if((estoqueDeMotos[i].getCapacidadeDoTanque()==capacidadeDoTanque)||(capacidadeDoTanque == 0))
- 	 									{
- 	 										if((estoqueDeMotos[i].getPreco() == preco)||(preco == 0))
- 	 										{
- 	 											aux += 1;
- 	 											System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+
- 	 											estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Cilindrada: "+	estoqueDeMotos[i].getCilindrada()+
- 	 											" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
- 	 										}
- 	 									}
- 	 								}
- 	 							}
- 	 						}
- 	 					}
+ 	 					aux += 1;
+						System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+
+						estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Tipo: "+estoqueDeMotos[i].getTipo()+" | Cilindrada: "
+						+	estoqueDeMotos[i].getCilindrada()+" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
  	 				}
  	 			}	
  	 		}
@@ -252,7 +215,6 @@ public class Loja
  		{
  			System.out.println("Erro: "+nl);
  		}
-			
  	}
  	
  	/*Os métodos de pesquisa por chassi, recebem apenas o chassi por parâmetro.
@@ -301,10 +263,9 @@ public class Loja
  					{
  						aux += 1;
  						System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+
-						estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Cilindrada: "+	estoqueDeMotos[i].getCilindrada()+
-						" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
+ 						estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Tipo: "+estoqueDeMotos[i].getTipo()+" | Cilindrada: "
+ 						+	estoqueDeMotos[i].getCilindrada()+" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
  					}
- 					
  				}
  			}
  			if(aux == 0)
@@ -323,8 +284,7 @@ public class Loja
  	 * Se estiver ocupada, ele imprime o veículo em questão.
  	 * Necessário tratar "NullPointerException".*/
  	public void listarEstoquedeCarros()
- 	{
- 		
+ 	{ 		
  		try
  		{
  	 		System.out.println("Listando carros cadastrados...\n");
@@ -336,9 +296,9 @@ public class Loja
  	 	 		}
  	 	 		else
  	 	 		{
- 	 	 	 		System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+" | Modelo: "+estoqueDeCarros[i].getModelo()+
- 	 	 	 		" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+	estoqueDeCarros[i].getTipo()+" | Motorização: "+estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+
- 	 	 	 		estoqueDeCarros[i].getCambio()+" | Preço: "+estoqueDeCarros[i].getPreco());
+ 	 	 	 		System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+" | Modelo: "+
+ 	 	 	 		estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+	estoqueDeCarros[i].getTipo()+" | Motorização: "+
+ 	 	 	 		estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+estoqueDeCarros[i].getCambio()+" | Preço: "+estoqueDeCarros[i].getPreco());
  	 	 		}
  	 		}
  		}
@@ -346,13 +306,11 @@ public class Loja
  		{
  			System.out.println("Erro: "+nl);
  		}
- 		System.out.println("");
- 		
+ 		System.out.println("");	
  	}
 	
  	public void listarEstoquedeMotos()
  	{
- 		
  		try
  		{
  	 		System.out.println("Listando motocicletas cadastradas...\n");
@@ -364,9 +322,9 @@ public class Loja
  	 	 		}
  	 	 		else
  	 	 		{
- 	 	 	 		System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+estoqueDeMotos[i].getModelo()+
- 	 	 	 		" | Cor: "+estoqueDeMotos[i].getCor()+" | Cilindrada: "+	estoqueDeMotos[i].getCilindrada()+" | Capacidade do Tanque: "+
- 	 	 	 		estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
+ 	 	 			System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+
+ 					estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Tipo: "+estoqueDeMotos[i].getTipo()+" | Cilindrada: "+
+ 	 	 			estoqueDeMotos[i].getCilindrada()+" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
  	 	 		}
  	 		}
  		}
@@ -399,7 +357,6 @@ public class Loja
  	 * Necessário tratar IOException.*/
  	public void gravarEstoque()
  	{
- 	
  		try
  		{
  			FileOutputStream fileOutCarros = new FileOutputStream("estoqueDeCarros.txt");
@@ -431,9 +388,7 @@ public class Loja
  		{
  			System.out.println("Erro: "+io);
  		}
- 		
  		System.out.println("Estoque de motos salvo com sucesso!");
- 		
  	}
  	
  	/* Em "recuperarEstoque" foi necessário utilizar "FileInputStream" e "ObjectInputStream" para permitir a entrada de um arquivo externo.
@@ -442,7 +397,6 @@ public class Loja
  	 * Necessário tratar IOException, NullPointerException e ClassNotFoundException.*/
 	public void recuperarEstoque()
  	{
- 
  		try
 	 	{
 	 		FileInputStream fileIn = new FileInputStream("estoqueDeCarros.txt");
@@ -461,9 +415,17 @@ public class Loja
 	 		in.close();
 	 		fileIn.close();
 	 	}
-		catch(IOException | ClassNotFoundException | NullPointerException io)
+		catch(IOException io)
 		{
 			System.out.println("Erro: "+io);
+		}
+ 		catch(ClassNotFoundException cn)
+		{
+			System.out.println("Erro: "+cn);
+		}
+ 		catch(NullPointerException np)
+		{
+			System.out.println("Erro: "+np);
 		}
 
  		try
@@ -484,11 +446,17 @@ public class Loja
 	 		in.close();
 	 		fileIn.close();
 	 	}
-		catch(IOException | ClassNotFoundException | NullPointerException io)
+ 		catch(IOException io)
 		{
 			System.out.println("Erro: "+io);
 		}
- 		
+ 		catch(ClassNotFoundException cn)
+		{
+			System.out.println("Erro: "+cn);
+		}
+ 		catch(NullPointerException np)
+		{
+			System.out.println("Erro: "+np);
+		}
  	}
- 	
 }

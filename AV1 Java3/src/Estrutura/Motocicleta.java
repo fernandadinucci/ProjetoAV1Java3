@@ -7,11 +7,11 @@ public class Motocicleta implements Serializable
 {
 	//Serializable: para dizer que os membros desta classe são "seriáveis".
 	
-	//Nessa classe retirei o atributo "tipo" por não achar necessário.
 	private String chassi;
 	private String montadora;
 	private String modelo;
 	private String cor;
+	private String tipo;
 	private int cilindrada;
 	private int capacidadeDoTanque;
 	private float preco;
@@ -50,6 +50,14 @@ public class Motocicleta implements Serializable
 	{
 		this.cor = cor;
 	}
+	public String getTipo()
+	{
+		return tipo;
+	}
+	public void setTipo(String tipo)
+	{
+		this.tipo = tipo;
+	}
 	public int getCilindrada() 
 	{
 		return cilindrada;
@@ -75,7 +83,8 @@ public class Motocicleta implements Serializable
 		this.preco = preco;
 	}
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + capacidadeDoTanque;
@@ -86,12 +95,13 @@ public class Motocicleta implements Serializable
 		result = prime * result
 				+ ((montadora == null) ? 0 : montadora.hashCode());
 		result = prime * result + Float.floatToIntBits(preco);
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
 	
-	//Sobrescrevendo o método equals.
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -101,29 +111,39 @@ public class Motocicleta implements Serializable
 		Motocicleta other = (Motocicleta) obj;
 		if (capacidadeDoTanque != other.capacidadeDoTanque)
 			return false;
-		if (chassi == null) {
+		if (chassi == null)
+		{
 			if (other.chassi != null)
 				return false;
 		} else if (!chassi.equals(other.chassi))
 			return false;
 		if (cilindrada != other.cilindrada)
 			return false;
-		if (cor == null) {
+		if (cor == null)
+		{
 			if (other.cor != null)
 				return false;
 		} else if (!cor.equals(other.cor))
 			return false;
-		if (modelo == null) {
+		if (modelo == null)
+		{
 			if (other.modelo != null)
 				return false;
 		} else if (!modelo.equals(other.modelo))
 			return false;
-		if (montadora == null) {
+		if (montadora == null)
+		{
 			if (other.montadora != null)
 				return false;
 		} else if (!montadora.equals(other.montadora))
 			return false;
 		if (Float.floatToIntBits(preco) != Float.floatToIntBits(other.preco))
+			return false;
+		if (tipo == null)
+		{
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
 	}

@@ -22,14 +22,14 @@ public class Executavel {
 		lj.listarEstoquedeCarros();
 		
 		System.out.println("Cadastrando motos...\n");
-		lj.adicionarMoto("2001", "Honda", "CG 150 Titan", "Branco",  150 , 20, 6000.00f, 0);
-		lj.adicionarMoto("2001", "Honda", "CG 150 Titan", "Branco",  150 , 20, 6000.00f, 0);
-		lj.adicionarMoto("2002", "Yamaha", "Factor YBR 125", "Verde", 125, 25, 5000.00f, 1);
-		lj.adicionarMoto("2003", "Suzuki", "Yes 125", "Prata", 125, 15, 8000.00f, 2);
-		lj.adicionarMoto("2003", "Suzuki", "Yes 125", "Prata", 125, 15, 8000.00f, 2);
-		lj.adicionarMoto("2004", "Yamaha", "XTZ", "Vermelho", 125, 23, 7000.00f, 3);
-		lj.adicionarMoto("2005", "Honda", "Biz", "Preto", 125, 18, 50000.00f, 4);
-		lj.adicionarMoto("2005", "Honda", "Biz", "Preto", 125, 18, 50000.00f, 4);
+		lj.adicionarMoto("2001", "Honda", "CG 150 Titan", "Branco", "Street",  150 , 20, 6000.00f, 0);
+		lj.adicionarMoto("2001", "Honda", "CG 150 Titan", "Branco", "Street",  150 , 20, 6000.00f, 0);
+		lj.adicionarMoto("2002", "Yamaha", "Factor YBR 125", "Verde", "Street", 125, 25, 5000.00f, 1);
+		lj.adicionarMoto("2003", "Suzuki", "Yes 125", "Prata", "Underbone", 125, 15, 8000.00f, 2);
+		lj.adicionarMoto("2003", "Suzuki", "Yes 125", "Prata", "Underbone", 125, 15, 8000.00f, 2);
+		lj.adicionarMoto("2004", "Yamaha", "XTZ", "Vermelho", "Street", 125, 23, 7000.00f, 3);
+		lj.adicionarMoto("2005", "Honda", "Biz", "Preto", "Underbone", 125, 18, 50000.00f, 4);
+		lj.adicionarMoto("2005", "Honda", "Biz", "Preto", "Underbone", 125, 18, 50000.00f, 4);
 		System.out.println();
 		lj.listarEstoquedeMotos();
 		
@@ -39,8 +39,8 @@ public class Executavel {
 		System.out.println();
 		
 		System.out.println("Pesquisando motocicletas...\n");
-		lj.pesquisarMoto(null, "Honda", null, null, 0, 0, 0);
-		lj.pesquisarMoto(null, "Yamaha", null, null, 0, 0, 0);
+		lj.pesquisarMoto(null, "Honda", null, null, null, 0, 0, 0);
+		lj.pesquisarMoto(null, "Yamaha", null, null, null, 0, 0, 0);
 		System.out.println();
 		
 		System.out.println("Pesquisando carros pelo chassi...\n");

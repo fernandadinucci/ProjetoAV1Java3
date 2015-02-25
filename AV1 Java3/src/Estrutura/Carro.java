@@ -3,7 +3,8 @@ package Estrutura;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Carro implements Serializable {
+public class Carro implements Serializable
+{
 	//Serializable: para dizer que os membros desta classe são "seriáveis".
 
 	private String chassi;
@@ -16,73 +17,75 @@ public class Carro implements Serializable {
 	private float preco;
 	//Private: para maior segurança dos dados.
 
-	public String getChassi() {
+	public String getChassi()
+	{
 		return chassi;
 	}
-
-	public void setChassi(String chassi) {
+	public void setChassi(String chassi)
+	{
 		this.chassi = chassi;
 	}
-
-	public String getMontadora() {
+	public String getMontadora()
+	{
 		return montadora;
 	}
-
-	public void setMontadora(String montadora) {
+	public void setMontadora(String montadora)
+	{
 		this.montadora = montadora;
 	}
-
-	public String getModelo() {
+	public String getModelo()
+	{
 		return modelo;
 	}
-
-	public void setModelo(String modelo) {
+	public void setModelo(String modelo)
+	{
 		this.modelo = modelo;
 	}
-
-	public String getCor() {
+	public String getCor() 
+	{
 		return cor;
 	}
-
-	public void setCor(String cor) {
+	public void setCor(String cor) 
+	{
 		this.cor = cor;
 	}
-
-	public String getTipo() {
+	public String getTipo() 
+	{
 		return tipo;
 	}
-
-	public void setTipo(String tipo) {
+	public void setTipo(String tipo) 
+	{
 		this.tipo = tipo;
 	}
-
-	public float getMotorizacao() {
+	public float getMotorizacao() 
+	{
 		return motorizacao;
 	}
-
-	public void setMotorizacao(float motorizacao) {
+	public void setMotorizacao(float motorizacao) 
+	{
 		this.motorizacao = motorizacao;
 	}
-
-	public String getCambio() {
+	public String getCambio()
+	{
 		return cambio;
 	}
-
-	public void setCambio(String cambio) {
+	public void setCambio(String cambio) 
+	{
 		this.cambio = cambio;
 	}
-
-	public float getPreco() {
+	public float getPreco() 
+	{
 		return preco;
 	}
-
-	public void setPreco(float preco) {
+	public void setPreco(float preco) 
+	{
 		this.preco = preco;
 	}
 	//Todos os Getters and Setters prontos!
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cambio == null) ? 0 : cambio.hashCode());
@@ -99,7 +102,8 @@ public class Carro implements Serializable {
 
 	//Sobrescrevendo o método equals.
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -107,27 +111,32 @@ public class Carro implements Serializable {
 		if (!(obj instanceof Carro))
 			return false;
 		Carro other = (Carro) obj;
-		if (cambio == null) {
+		if (cambio == null)
+		{
 			if (other.cambio != null)
 				return false;
 		} else if (!cambio.equals(other.cambio))
 			return false;
-		if (chassi == null) {
+		if (chassi == null)
+		{
 			if (other.chassi != null)
 				return false;
 		} else if (!chassi.equals(other.chassi))
 			return false;
-		if (cor == null) {
+		if (cor == null)
+		{
 			if (other.cor != null)
 				return false;
 		} else if (!cor.equals(other.cor))
 			return false;
-		if (modelo == null) {
+		if (modelo == null)
+		{
 			if (other.modelo != null)
 				return false;
 		} else if (!modelo.equals(other.modelo))
 			return false;
-		if (montadora == null) {
+		if (montadora == null)
+		{
 			if (other.montadora != null)
 				return false;
 		} else if (!montadora.equals(other.montadora))
@@ -137,7 +146,8 @@ public class Carro implements Serializable {
 			return false;
 		if (Float.floatToIntBits(preco) != Float.floatToIntBits(other.preco))
 			return false;
-		if (tipo == null) {
+		if (tipo == null)
+		{
 			if (other.tipo != null)
 				return false;
 		} else if (!tipo.equals(other.tipo))
@@ -146,4 +156,3 @@ public class Carro implements Serializable {
 	}
 
 }
-
