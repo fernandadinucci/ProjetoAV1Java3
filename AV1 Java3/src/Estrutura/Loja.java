@@ -1,5 +1,4 @@
 package Estrutura;
-
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,451 +11,273 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
-public class Loja 
+public class Loja
 {
-	
-	private String endereco;
-	private String nome;
-	private Carro[] estoqueDeCarros = new Carro[10];
-	private Motocicleta[] estoqueDeMotos = new Motocicleta[10];
-	
-	//Todos os Getters and Setters prontos!
-	public String getEndereco() 
-	{
-		return endereco;
-	}
-	public void setEndereco(String endereco) 
-	{
-		this.endereco = endereco;
-	}
-	public String getNome() 
-	{
-		return nome;
-	}
-	public void setNome(String nome) 
-	{
-		this.nome = nome;
-	}
-	
-	/*Os métodos "estaCadastrado" para carro e moto, funcionam como um mecanismo de busca dentro do array primitivo.
-	 * Após "entrar" no array, ele utiliza o "equals" para comparar os dois elementos.
-	 * Como um método boolean, ele retorna verdadeiro se for igual, e falso caso contrário.*/
-	public boolean estaCadastrado(Carro carro)
-	{
-		for(int i = 0; i < estoqueDeCarros.length; i++)
-		{
-			if(estoqueDeCarros[i] != null)
-			{
-				if(estoqueDeCarros[i].equals(carro))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	public boolean estaCadastrado(Motocicleta moto)
-	{
-		for(int i = 0; i < estoqueDeMotos.length; i++)
-		{
-			if(estoqueDeMotos[i] != null)
-			{
-				if(estoqueDeMotos[i].equals(moto))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	/*Os métodos "adicionarCarro" e "adicionarMoto" recebem por parâmetro os atributos das classes em questão.
-	 * Além desses atributos eles também recebem o "index" que seria a posição dentro do array.
-	 * Primeiro um objeto carro recebe todos os parâmetros, para depois verificarmos se já existe dentro do array
-	 * um carro igual. Caso já exista, ele retorna uma mensagem de carro já cadastrado e não inseri o mesmo.
-	 * Caso seja um carro diferente, ele insere dentro do array na posição index os dados desse carro.
-	 * Nesses dois métodos foi necessário tratar o "NullPointerException".*/
-	public void adicionarCarro(String chassi, String montadora, String modelo, String cor, String tipo, float motorizacao, String cambio, float preco, int index)
-	{
-		try
-		{
-			Carro c = new Carro();
-			
-			c.setChassi(chassi);
-			c.setMontadora(montadora);
-			c.setModelo(modelo);
-			c.setCor(cor);
-			c.setTipo(tipo);
-			c.setMotorizacao(motorizacao);
-			c.setCambio(cambio);
-			c.setPreco(preco);
-			
-			if(estaCadastrado(c))
-			{
-				System.out.println("Erro: Carro já cadastrado!");
-			}
-			else
-			{
-				estoqueDeCarros[index] = c;
-				System.out.println("Carro cadastrado com sucesso!");				
-			}
-		}
-		catch(NullPointerException nl)
-		{
-			System.out.println("Erro: "+nl);
-		}
-		catch(IndexOutOfBoundsException ob)
-		{
-			System.out.println("Erro: "+ob);
-		}
-	}
-	
- 	public void adicionarMoto(String chassi, String montadora, String modelo, String cor, String tipo, int cilindrada, int capacidadeDoTanque, float preco, int index)
-	{
-		try
-		{
-			Motocicleta m = new Motocicleta();
-			
-			m.setChassi(chassi);
-			m.setMontadora(montadora);
-			m.setModelo(modelo);
-			m.setCor(cor);
-			m.setTipo(tipo);
-			m.setCilindrada(cilindrada);
-			m.setCapacidadeDoTanque(capacidadeDoTanque);
-			m.setPreco(preco);
-			
-			if(estaCadastrado(m))
-			{
-				System.out.println("Erro: Motocicleta já cadastrada!");
-			}
-			else
-			{
-				estoqueDeMotos[index] = m;
-				System.out.println("Motocicleta cadastrada com sucesso!");
-			}
-		}
-		catch(NullPointerException nl)
-		{
-			System.out.println("Erro: "+nl);
-		}
-		catch(IndexOutOfBoundsException ob)
-		{
-			System.out.println("Erro: "+ob);
-		}
-	}
- 	
- 	/*Os métodos "pesquisarCarro" e "pesquisarMoto" recebem atributos das classes por parâmetro.
- 	 * Nesses métodos elaborei uma árvore de "if" para verificar atributo por atributo até retornar se encontrou ou não.
- 	 * Necessário tratar o "NullPointerException".*/
- 	public void pesquisarCarro(String chassi, String montadora, String modelo, String cor, String tipo, float motorizacao, String cambio, float preco)
- 	{
- 		try
- 		{
- 			int aux = 0;
- 	 		
- 	 		for (int i = 0; i < estoqueDeCarros.length; i++)
- 	 		{
- 	 			if(estoqueDeCarros[i] != null)
- 	 			{
- 	 				if(((estoqueDeCarros[i].getChassi()==chassi)||(chassi == null)) && ((estoqueDeCarros[i].getMontadora()==montadora)||(montadora == null)) &&
- 	 				((estoqueDeCarros[i].getModelo()==modelo)||(modelo == null)) && ((estoqueDeCarros[i].getCor()==cor)||(cor == null)) && 
- 	 				((estoqueDeCarros[i].getTipo()==tipo)||(tipo == null)) && ((estoqueDeCarros[i].getMotorizacao()==motorizacao)||(motorizacao == 0)) && 
- 	 				((estoqueDeCarros[i].getCambio()==cambio)||(cambio == null)) && ((estoqueDeCarros[i].getPreco() == preco)||(preco == 0)))
- 	 				{
- 	 					aux += 1;
-						System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+
-						" | Modelo: "+estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+estoqueDeCarros[i].getTipo()+
-						" | Motorização: "+estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+ estoqueDeCarros[i].getCambio()+
-						" | Preço: "+estoqueDeCarros[i].getPreco());
- 	 				}
- 	 			}
- 			}
- 	 		if(aux == 0)
- 	 		{
- 	 			System.out.println("Carro não encontrado!");
- 	 		}
- 		}
- 		catch(NullPointerException nl)
- 		{
- 			System.out.println("Erro: "+nl);
- 		}
- 	}
- 	
- 	public void pesquisarMoto(String chassi, String montadora, String modelo, String cor, String tipo, int cilindrada, int capacidadeDoTanque, float preco)
- 	{
- 		try
- 		{
- 	 		int aux = 0;
- 	 		
- 	 		for (int i = 0; i < estoqueDeMotos.length; i++)
- 	 		{
- 	 			if(estoqueDeMotos[i] != null)
- 	 			{
- 	 				if(((estoqueDeMotos[i].getChassi()==chassi)||(chassi == null)) && ((estoqueDeMotos[i].getMontadora()==montadora)||(montadora == null)) &&
- 	 				((estoqueDeMotos[i].getModelo()==modelo)||(modelo == null)) && ((estoqueDeMotos[i].getCor()==cor)||(cor == null)) &&
- 	 				((estoqueDeMotos[i].getTipo()==tipo)||(tipo == null)) && ((estoqueDeMotos[i].getCilindrada()==cilindrada)||(cilindrada == 0)) &&
- 	 				((estoqueDeMotos[i].getCapacidadeDoTanque()==capacidadeDoTanque)||(capacidadeDoTanque == 0)) && ((estoqueDeMotos[i].getPreco() == preco)||(preco == 0)))
- 	 				{
- 	 					aux += 1;
-						System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+
-						estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Tipo: "+estoqueDeMotos[i].getTipo()+" | Cilindrada: "
-						+	estoqueDeMotos[i].getCilindrada()+" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
- 	 				}
- 	 			}	
- 	 		}
- 	 		if(aux == 0)
- 		 	{
- 		 		System.out.println("Motocicleta não encontrada!");
- 		 	}
- 		}
- 		catch(NullPointerException nl)
- 		{
- 			System.out.println("Erro: "+nl);
- 		}
- 	}
- 	
- 	/*Os métodos de pesquisa por chassi, recebem apenas o chassi por parâmetro.
- 	 * Necessário tratar o "NullPointerException"*/
- 	public void pesquisarCarro(String chassi)
- 	{
- 		try
- 		{
- 	 		int aux = 0;
- 	 		
- 	 		for (int i = 0; i < estoqueDeCarros.length; i++) 
- 	 		{
- 				if(estoqueDeCarros[i] != null)
- 				{
- 					if(estoqueDeCarros[i].getChassi()==chassi)
- 					{
- 						aux += 1;
- 						System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+" | Modelo: "+
- 						estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+	estoqueDeCarros[i].getTipo()+
- 						" | Motorização: "+estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+ estoqueDeCarros[i].getCambio()+
- 						" | Preço: "+estoqueDeCarros[i].getPreco());
- 					}
- 				}
- 	 		}
-			if(aux == 0)
-			{
-				System.out.println("Carro não encontrado!");
-			}
- 		}
- 		catch(NullPointerException nl)
- 		{
- 			System.out.println("Erro: "+nl);
- 		}
- 	}
- 	
- 	public void pesquisarMoto(String chassi)
- 	{
- 		try
- 		{
- 	 		int aux = 0;
- 			for(int i = 0; i < estoqueDeMotos.length; i++)
- 			{
- 				if(estoqueDeMotos[i] != null)
- 				{
- 					if(estoqueDeMotos[i].getChassi()==chassi)
- 					{
- 						aux += 1;
- 						System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+
- 						estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Tipo: "+estoqueDeMotos[i].getTipo()+" | Cilindrada: "
- 						+	estoqueDeMotos[i].getCilindrada()+" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
- 					}
- 				}
- 			}
- 			if(aux == 0)
-			{
-				System.out.println("Motocicleta não encontrada!");
-			}
- 		}
- 		catch(NullPointerException nl)
- 		{
- 			System.out.println("Erro: "+nl);
- 		}
- 	}
- 	
- 	/*Nos métodos de "listarEstoque" foi implementado um for para percorrer todo o array.
- 	 * Caso a posição do array seja igual a null, ele imprime que a vaga está disponivel.
- 	 * Se estiver ocupada, ele imprime o veículo em questão.
- 	 * Necessário tratar "NullPointerException".*/
- 	public void listarEstoquedeCarros()
- 	{ 		
- 		try
- 		{
- 	 		System.out.println("Listando carros cadastrados...\n");
- 	 		for( int i = 0; i < estoqueDeCarros.length; i++)
- 	 		{
- 	 			if(estoqueDeCarros[i] == null)
- 	 	 		{
- 	 	 			System.out.println("Vaga disponível!");
- 	 	 		}
- 	 	 		else
- 	 	 		{
- 	 	 	 		System.out.println("Chassi: "+estoqueDeCarros[i].getChassi()+" | Montadora: "+estoqueDeCarros[i].getMontadora()+" | Modelo: "+
- 	 	 	 		estoqueDeCarros[i].getModelo()+" | Cor: "+estoqueDeCarros[i].getCor()+" | Tipo: "+	estoqueDeCarros[i].getTipo()+" | Motorização: "+
- 	 	 	 		estoqueDeCarros[i].getMotorizacao()+" | Cambio: "+estoqueDeCarros[i].getCambio()+" | Preço: "+estoqueDeCarros[i].getPreco());
- 	 	 		}
- 	 		}
- 		}
- 		catch(NullPointerException nl)
- 		{
- 			System.out.println("Erro: "+nl);
- 		}
- 		System.out.println("");	
- 	}
-	
- 	public void listarEstoquedeMotos()
- 	{
- 		try
- 		{
- 	 		System.out.println("Listando motocicletas cadastradas...\n");
- 	 		for( int i = 0; i < estoqueDeMotos.length; i++)
- 	 		{
- 	 			if(estoqueDeMotos[i] == null)
- 	 	 		{
- 	 	 			System.out.println("Vaga disponível!");
- 	 	 		}
- 	 	 		else
- 	 	 		{
- 	 	 			System.out.println("Chassi: "+estoqueDeMotos[i].getChassi()+" | Montadora: "+estoqueDeMotos[i].getMontadora()+" | Modelo: "+
- 					estoqueDeMotos[i].getModelo()+" | Cor: "+estoqueDeMotos[i].getCor()+" | Tipo: "+estoqueDeMotos[i].getTipo()+" | Cilindrada: "+
- 	 	 			estoqueDeMotos[i].getCilindrada()+" | Capacidade do Tanque: "+estoqueDeMotos[i].getCapacidadeDoTanque()+" | Preço: "+estoqueDeMotos[i].getPreco());
- 	 	 		}
- 	 		}
- 		}
- 		catch(NullPointerException nl)
- 		{
- 			System.out.println("Erro: "+nl);
- 		}
- 		System.out.println("");
- 	}
- 	
- 	/*No método "limparEstoque", foi utilizado um for para percorrer todo o array e atribuir null a todas as posições.
- 	 * Assim, o Array se torna "vazio".*/
- 	public void limparEstoque()
- 	{
- 		for(int i = 0; i < estoqueDeCarros.length; i++)
- 		{
- 	 		estoqueDeCarros[i] = null;
- 		}
-	 	System.out.println("Estoque de carros vazio!");
- 		for(int i = 0; i < estoqueDeMotos.length; i++)
- 		{
- 	 		estoqueDeMotos[i] = null;
- 		}
- 		System.out.println("Estoque de motocicletas vazio!");
- 	}
- 	
- 	/* Em "gravarEstoque" foram utilizados "FileOutputStream" e "ObjectOutputStream" para permitir a saída para um arquivo externo.
- 	 * Utilizado o "writeObject" para "escrever" no arquivo de texto.
- 	 * Depois só precisou "fechar" o arquivo.
- 	 * Necessário tratar IOException.*/
- 	public void gravarEstoque()
- 	{
- 		try
- 		{
- 			FileOutputStream fileOutCarros = new FileOutputStream("estoqueDeCarros.txt");
- 			ObjectOutputStream outCarros = new ObjectOutputStream(fileOutCarros);
- 	 		for (Carro carro : estoqueDeCarros)
- 	 		{
- 	 			outCarros.writeObject(carro);
- 	 		}
- 	 		outCarros.close();
- 		 	fileOutCarros.close();
- 	 		System.out.println("Estoque de carros salvo com sucesso!");
- 		}
- 		catch(IOException io)
- 		{
- 			System.out.println("Erro: "+io);
- 		}
- 		try
- 		{
- 			FileOutputStream fileOutMotos = new FileOutputStream("estoqueDeMotos.txt");
- 			ObjectOutputStream outMotos = new ObjectOutputStream(fileOutMotos);
- 	 		for (Motocicleta moto : estoqueDeMotos) 
- 	 		{
- 	 			outMotos.writeObject(moto);
- 			}
- 	 		outMotos.close();
- 	 		fileOutMotos.close();
- 		}
- 		catch(IOException io)
- 		{
- 			System.out.println("Erro: "+io);
- 		}
- 		System.out.println("Estoque de motos salvo com sucesso!");
- 	}
- 	
- 	/* Em "recuperarEstoque" foi necessário utilizar "FileInputStream" e "ObjectInputStream" para permitir a entrada de um arquivo externo.
- 	 * Enquanto o arquivo não chegar ao final e "i" for menor que o tamanho do array, um objeto carro ou moto estará recebendo o objeto do arquivo txt.
- 	 * Após receber o arquivo o "if" vai verificar se esse veículo é null. Caso não seja, ele atribui ao array os atributos desse veículo e parti para o próximo laço.
- 	 * Necessário tratar IOException, NullPointerException e ClassNotFoundException.*/
-	public void recuperarEstoque()
- 	{
- 		try
-	 	{
-	 		FileInputStream fileIn = new FileInputStream("estoqueDeCarros.txt");
-	 		ObjectInputStream in = new ObjectInputStream(fileIn);
-	 		int i = 0;
-	 		while((fileIn != null)&&(i < estoqueDeCarros.length))
-	 		{
-	 			Carro carro = (Carro) in.readObject();
-				if(carro != null)
-				{
-					estoqueDeCarros[i] =  carro;
-				}
-				i += 1;
-	 		}
-	 		System.out.println("Estoque de carros recuperado com sucesso!");
-	 		in.close();
-	 		fileIn.close();
-	 	}
-		catch(IOException io)
-		{
-			System.out.println("Erro: "+io);
-		}
- 		catch(ClassNotFoundException cn)
-		{
-			System.out.println("Erro: "+cn);
-		}
- 		catch(NullPointerException np)
-		{
-			System.out.println("Erro: "+np);
-		}
 
- 		try
-	 	{
-	 		FileInputStream fileIn = new FileInputStream("estoqueDeMotos.txt");
-	 		ObjectInputStream in = new ObjectInputStream(fileIn);
-	 		int i = 0;
-	 		while((fileIn != null)&&(i < estoqueDeMotos.length))
-	 		{
-	 			Motocicleta moto = (Motocicleta) in.readObject();
-	 			if(moto != null)
-	 			{
-		 			estoqueDeMotos[i] = moto;
-	 			}
-				i += 1;
-	 		}
-	 		System.out.println("Estoque de motocicletas recuperado com sucesso!");
-	 		in.close();
-	 		fileIn.close();
-	 	}
- 		catch(IOException io)
-		{
-			System.out.println("Erro: "+io);
-		}
- 		catch(ClassNotFoundException cn)
-		{
-			System.out.println("Erro: "+cn);
-		}
- 		catch(NullPointerException np)
-		{
-			System.out.println("Erro: "+np);
-		}
- 	}
+    private String endereco;
+    private String nome;
+    ArrayList<Veiculo> estoqueDeCarros= new ArrayList<Veiculo>();
+    ArrayList<Veiculo> estoqueDeMotos = new ArrayList<Veiculo>();
+    
+//Todos os Getters and Setters prontos!
+    public String getEndereco()
+    {
+        return endereco;
+    }
+    
+    public void setEndereco(String endereco)
+    {
+        this.endereco = endereco;
+    }
+    
+    public String getNome()
+    {
+        return nome;
+    }
+    
+    public void setNome(String nome)
+    {
+        this.nome = nome;
+    }
+    
+    
+    public boolean estaCadastrado(Veiculo v)
+    {
+        if ((estoqueDeCarros.contains(v) == true) || (estoqueDeMotos.contains(v) == true)) {
+            return true;
+        }
+        else
+            return false;        
+    }
+
+    public void adicionarVeiculo(OpcoesVeiculo ov, String chassi, MontadoraDeVeiculo montadora, 
+            ModeloDeVeiculo modelo, Cor cor, TipoDeVeiculo tipo, float preco)
+    {
+        Veiculo v = new Veiculo();
+        v.propriedades.put("Opcao de Veiculo", ov);
+        v.setChassi(chassi);
+        v.propriedades.put("Montadora", montadora);
+        v.propriedades.put("Modelo", modelo);
+        v.propriedades.put("Cor", cor);
+        v.propriedades.put("Tipo", tipo);
+        v.setPreco(preco);
+        if(estaCadastrado(v))
+        {
+            System.out.println("Erro: Veiculo já cadastrado!");
+        }
+        else
+        {
+            if (ov == OpcoesVeiculo.Carro) { 
+                estoqueDeCarros.add(v);
+                System.out.println("Carro cadastrado com sucesso!");
+            }
+            else
+            {
+                if (ov == OpcoesVeiculo.Motocicleta) {
+                    estoqueDeMotos.add(v);
+                    System.out.println("Moto cadastrada com sucesso!");
+                }
+            }
+        }
+    }
+
+    public void pesquisarVeiculo(OpcoesVeiculo ov, String chassi, MontadoraDeVeiculo montadora, 
+            ModeloDeVeiculo modelo, Cor cor, TipoDeVeiculo tipo, float preco)
+    {
+        Veiculo v = new Veiculo();
+        v.propriedades.put("Opcao de Veiculo", ov);
+        v.setChassi(chassi);
+        v.propriedades.put("Montadora", montadora);
+        v.propriedades.put("Modelo", modelo);
+        v.propriedades.put("Cor", cor);
+        v.propriedades.put("Tipo", tipo);
+        v.setPreco(preco);
+        
+        if (ov == OpcoesVeiculo.Carro) {
+            if (estoqueDeCarros.contains(v))
+                System.out.println("Carro encontrado!");
+            else
+                System.out.println("Carro não encontrado!");
+        }    
+    
+        if (ov == OpcoesVeiculo.Motocicleta) {
+            if (estoqueDeMotos.contains(v)) {
+                System.out.println("Moto encontrada!");
+            }
+            else
+                System.out.println("Moto não encontrada!");
+        }
+    }
+    
+    
+    public void pesquisarCarro(String chassi)
+    {
+        int aux = 0;
+        
+        for (Veiculo v : estoqueDeCarros) {
+            if(v.getChassi()==chassi) {
+                aux= 1;
+                for(@SuppressWarnings("rawtypes") Enum valoresEnum: v.propriedades.values())
+                {
+                    System.out.println(valoresEnum);
+                }
+                System.out.println(v.getChassi());
+                System.out.println(v.getPreco());
+            }
+        }
+        
+        if (aux== 0) {
+            System.out.println("Carro não encontrado!");
+        }
+        
+    }
+    
+    public void pesquisarMoto(String chassi)
+    {
+        int aux = 0;
+        
+        for (Veiculo v : estoqueDeMotos) {
+            if(v.getChassi()==chassi) {
+                aux= 1;
+                for(@SuppressWarnings("rawtypes") Enum valoresEnum: v.propriedades.values())
+                {
+                    System.out.println(valoresEnum);
+                }
+                System.out.println(v.getChassi());
+                System.out.println(v.getPreco());
+            }
+        }
+        if (aux == 0) {
+            System.out.println("Moto não encontrada!");
+        }
+        
+    }
+    
+    public void listarEstoquedeCarros()
+    {
+        System.out.println("Listando carros cadastrados...\n");
+        if(estoqueDeCarros.isEmpty())
+        {
+            System.out.println("Estoque vazio!");
+        }
+        else
+        {
+            for (Veiculo v : estoqueDeCarros) {
+                for(@SuppressWarnings("rawtypes") Enum valoresEnum: v.propriedades.values())
+                {
+                    System.out.println(valoresEnum);
+                }
+                System.out.println(v.getChassi());
+                System.out.println(v.getPreco());
+                System.out.println("");
+            }
+        }
+    }
+    
+    public void listarEstoquedeMotos()
+    {
+        System.out.println("Listando motos cadastradas...\n");
+        
+        if(estoqueDeMotos.isEmpty()) 
+        {
+            System.out.println("Estoque vazio!");
+            }
+        else
+        {
+            for (Veiculo v : estoqueDeMotos) {
+                for(@SuppressWarnings("rawtypes") Enum valoresEnum: v.propriedades.values())
+                {
+                    System.out.println(valoresEnum);
+                }
+                System.out.println(v.getChassi());
+                System.out.println(v.getPreco());
+                System.out.println("");
+            }
+        }
+    }
+
+
+    public void limparEstoque()
+    {
+        estoqueDeCarros.clear();
+        estoqueDeMotos.clear();
+    }
+    
+    public void gravarEstoque()
+    {
+        try
+        {
+            FileOutputStream fileOutCarros = new FileOutputStream("estoqueDeCarros.txt");
+            ObjectOutputStream outCarros = new ObjectOutputStream(fileOutCarros);
+            for (Veiculo v : estoqueDeCarros)
+            {
+                outCarros.writeObject(v);
+            }
+            outCarros.close();
+            fileOutCarros.close();
+            System.out.println("Estoque de carros salvo com sucesso!");
+            }
+        catch(IOException io)
+        {
+            System.out.println("Erro: "+io);
+            }
+        try
+        {
+            FileOutputStream fileOutMotos = new FileOutputStream("estoqueDeMotos.txt");
+            ObjectOutputStream outMotos = new ObjectOutputStream(fileOutMotos);
+            for (Veiculo v : estoqueDeMotos)
+            {
+                outMotos.writeObject(v);
+                }
+            outMotos.close();
+            fileOutMotos.close();
+            }
+        catch(IOException io)
+        {
+            System.out.println("Erro: "+io);
+            }
+        
+        System.out.println("Estoque de motos salvo com sucesso!");
+    }
+
+     @SuppressWarnings("null")
+     public void recuperarEstoque()
+     {
+         try
+         {
+             FileInputStream fileIn = new FileInputStream("estoqueDeCarros.txt");
+             ObjectInputStream in = new ObjectInputStream(fileIn);
+             while(fileIn != null)
+             {
+                 Veiculo v= (Veiculo) in.readObject();
+                 if (v.propriedades.containsValue(OpcoesVeiculo.Carro))
+                     estoqueDeCarros.add(v);
+            }
+             in.close();
+             fileIn.close();
+            }
+         catch(IOException | ClassNotFoundException io)
+         {
+             
+         }
+         try
+         {
+             FileInputStream fileIn = new FileInputStream("estoqueDeMotos.txt");
+             ObjectInputStream in = new ObjectInputStream(fileIn);
+             while(fileIn != null)
+             {
+                 Veiculo v = (Veiculo) in.readObject();
+                 if (v.propriedades.containsValue(OpcoesVeiculo.Motocicleta))
+                     estoqueDeMotos.add(v);
+             }
+             in.close();
+             fileIn.close();
+        }
+         catch(IOException | ClassNotFoundException io)
+         {
+             
+         }
+         
+     }
+     
 }
